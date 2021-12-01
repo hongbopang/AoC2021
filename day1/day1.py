@@ -4,36 +4,36 @@ Created on Wed Dec  1 12:57:42 2021
 
 @author: hongb
 """
-
-
-f = open("input.txt", "r")
-count = 0
-
-Flag = False
-values = []
-for line in f:
-    values.append(int(line))
-    a = int(line)
-    if not Flag:
-        Flag = True
-        prev = a
-    else:
-        if a > prev:
+def count_stride(stride, values):
+    prev = sum(values[:stride])
+    count = 0
+    
+    f_p = stride    
+    
+    while f_p < len(values) + 1:
+        tmp = sum(values[f_p-stride:f_p])
+        if tmp > prev:
             count += 1
-        prev = a
+        prev = tmp
+        f_p += 1
+    return count
+    
+def direct_compare(stride, values):
+    f_p = stride
+    b_p = 0
+    count = 0
+    
+    while f_p < len(values):
+        if values[f_p] > values[b_p]:
+            count += 1
+        f_p += 1
+        b_p += 1
+    return count
+    
+
+values = [int(i) for i in open("input.txt", "r")]
         
-
-print(count)
-back_ptr = 0
-front_ptr = 3
-count2 = 0
-prev = sum(values[:2])
-
-while front_ptr < len(values):
-    temp = prev - values[back_ptr] + values[front_ptr]
-    if temp > prev:
-        count2 += 1
-    prev = temp
-    front_ptr += 1
-    back_ptr += 1
-print(count2)
+print(direct_compare(1,values))
+print(direct_compare(3,values))
+#1692
+#1724
