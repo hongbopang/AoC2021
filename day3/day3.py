@@ -34,7 +34,7 @@ for i in range(length):
         ans[i] = 1
         
 gamma = bin_list_to_dec(ans)
-print((total - gamma) * gamma)
+#print((total - gamma) * gamma)
 #4191876
 
 bitmask = [1 for _ in range(len(values))]
@@ -83,6 +83,6 @@ for i in range(length):
         
 oxy = bin_list_to_dec(a) 
 co2 = bin_list_to_dec(b)
-
-print(oxy*co2)
+print(a)
+#print(oxy*co2)
 #3414905

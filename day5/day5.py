@@ -8,7 +8,6 @@ Created on Sun Dec  5 12:13:09 2021
 
 values = [i.strip().split(" -> ") for i in open("input.txt", "r")]
 
-
 processed = []
 
 for entry in values:
@@ -38,7 +37,7 @@ for start, end in processed:
         
         
         for i in range(smaller, larger+1):
-            idx = str(x1)+","+str(i)
+            idx = (x1,i)
             if idx not in positions:
                 positions[idx] = 0
             positions[idx] += 1
@@ -51,7 +50,7 @@ for start, end in processed:
             smaller = x2
         
         for i in range(smaller, larger+1):
-            idx = str(i)+","+str(y1)
+            idx = (i,y1)
             if idx not in positions:
                 positions[idx] = 0
             positions[idx] += 1
@@ -62,6 +61,7 @@ for entry in positions:
         count += 1
      
 print(count)
+#7436
 positions2 = dict()
 for start, end in processed:
     x1, y1 = start
@@ -87,7 +87,7 @@ for start, end in processed:
     
     while 1:
 
-        idx = str(x)+","+str(y)
+        idx = (x,y)
         if idx not in positions2:
             positions2[idx] = 0
         positions2[idx] += 1
@@ -103,4 +103,4 @@ for entry in positions2:
         count += 1
      
 print(count)
-
+#21104
