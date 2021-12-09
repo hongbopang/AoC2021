@@ -31,4 +31,21 @@ print(fish_counter(fishcount, 80))
 print(fish_counter(fishcount, 256))
 
 
+values = [i.strip().split(",") for i in open("input.txt", "r")]
+fishes = values[0]
+slow_fish = [int(f) for f in fishes]
 
+
+for _ in range(80):
+    new_fish = []
+    for fish in slow_fish:
+        if fish == 0:
+            new_fish.append(8)
+            new_fish.append(6)
+            
+        else:
+            new_fish.append(fish - 1)
+    slow_fish = [i for i in new_fish]
+            
+print(len(slow_fish))
+    
