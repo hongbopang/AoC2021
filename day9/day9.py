@@ -4,6 +4,7 @@ Created on Thu Dec  9 12:43:23 2021
 
 @author: hongb
 """
+import time
 def find_basins(bottom,board,length,height):
     searched = []
     frontier = [bottom]
@@ -15,8 +16,7 @@ def find_basins(bottom,board,length,height):
         if r != 0 and board[r-1][c] != 9 and (r-1,c) not in searched:
             frontier.append((r-1,c))
             searched.append((r-1,c))
-            count += 1
-        
+            count += 1       
             
     
         if r != height - 1 and board[r+1][c] != 9 and (r+1,c) not in searched:
@@ -45,9 +45,7 @@ def find_basins(bottom,board,length,height):
 def get_risk(r,c,board, length, height):
     friends = []
     
-    val = board[r][c]
-
-    
+    val = board[r][c]    
     
     if r != 0:
         if board[r-1][c] <= val:
@@ -65,13 +63,11 @@ def get_risk(r,c,board, length, height):
             return 0
     return val + 1
     
-    
-    
+       
     
 values = [i.strip().split() for i in open("input.txt", "r")]
 
-
-
+start = time.time()
 board = []
 for line in values:
     tmp = []
@@ -102,10 +98,9 @@ while r < height and c < length:
         
 print(risk)
 areas = []
-counter = 0
+
 for locations in basins_point:
     areas.append(find_basins(locations, board, length, height))
-    print(counter)
-    counter += 1
 areas.sort()
 print(areas[-1]*areas[-2]*areas[-3])
+print(time.time() - start)

@@ -21,26 +21,26 @@ def decode(words_in, output):
                 counter_track[char] = 0
             counter_track[char] += 1
     
-    alp, bet, det, gam, omn, ome, zeke = 0,0,0,0,0,0,0
+    top, left_up, right_up, mid, left_bot, right_bot,bots = 0,0,0,0,0,0,0
     
     for letter in counter_track:
         val = counter_track[letter]
         if val == 6:
-            bet = letter
+            left_up = letter
         elif val == 4:
-            omn = letter
+            left_bot = letter
         elif val == 9:
-            ome = letter
+            right_bot = letter
         elif val == 7:
             if letter in fours:
-                gam = letter
+                mid = letter
             else:
-                zeke = letter
+                bot = letter
         elif val == 8:
             if letter in twos:
-                det = letter
+                right_up = letter
             else:
-                alp = letter
+                top = letter
     ans = 0
     for word in output:
         ans *= 10
@@ -54,16 +54,16 @@ def decode(words_in, output):
             ans += 8
     
         elif len(word) == 6:
-            if gam not in word:
+            if mid not in word:
                 ans += 0
-            elif det not in word:
+            elif right_up not in word:
                 ans += 6
-            elif omn not in word:
+            elif left_bot not in word:
                 ans += 9
         elif len(word) == 5:
-            if det not in word:
+            if right_up not in word:
                 ans += 5
-            elif ome not in word:
+            elif right_bot not in word:
                 ans += 2
             else:
                 ans += 3
@@ -72,9 +72,7 @@ def decode(words_in, output):
 
 values = [i.strip().split(" | ") for i in open("input.txt", "r")]
 
-
 lengths = dict()
-
 lengths[0] = 6
 lengths[1] = 2
 lengths[2] = 5
@@ -94,14 +92,14 @@ for line in values:
     ins, outs = line
     ins = ins.split()
     outs = outs.split()
-
-    tmp = decode(ins, outs)
-    ans2 += tmp
    
     words = outs
     for word in words:
         if len(word) in [2,4,3,7]:
             counter += 1
+            
+    tmp = decode(ins, outs)
+    ans2 += tmp
             
 print(counter)
 #284
