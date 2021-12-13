@@ -25,17 +25,16 @@ class octopus:
                 if tc != c or tr != r:
                     self.neighbours.append((tr,tc))
                     
-    def increment(self):
-       
-        self.value += 1
-        if self.value > 9:
-            self.flash()
-            
-    def flash(self):
+    def increment(self):  
         if not self.flashed:
-            self.flashed = True
-            for r,c in self.neighbours:
-                self.octopi[r][c].increment()
+            self.value += 1
+            if self.value > 9:
+                self.flash()
+            
+    def flash(self):        
+        self.flashed = True
+        for r,c in self.neighbours:
+            self.octopi[r][c].increment()
                 
     def cleanup(self):
         if self.flashed:
@@ -70,7 +69,7 @@ while 1:
            flashes += octopi[r][c].cleanup()
     total += flashes
     counter += 1
-    if counter == 99:
+    if counter == 100:
         print(total)
     if flashes == 100:
         print(counter)
