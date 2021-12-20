@@ -91,8 +91,12 @@ def solver_2():
         for bingos in boards:
             tmp = bingos.mark_value(i)
             if tmp != -1:
+                print(i, tmp)
+                if i == "97":
+                    print(bingos.locations)
                 left -= 1
                 if left == 0:
+                    print(i)
                     return tmp
             
     

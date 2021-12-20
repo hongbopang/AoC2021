@@ -26,7 +26,6 @@ path_count = 0
 frontier = [["start"]]
 
 while len(frontier) != 0:
-
     me = frontier.pop()
     curr_pos = me[-1]
     if curr_pos == "end":

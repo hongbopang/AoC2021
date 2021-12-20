@@ -15,12 +15,6 @@ fold_ins = []
 
 dots = True
 
-rmin = 0
-rmax = 0
-
-cmin = 0
-cmax = 0
-
 for point in lines:
     if not point:
         dots = False
@@ -28,25 +22,17 @@ for point in lines:
     if dots:
         point = point.split(",")
         dotted[(int(point[1]),int(point[0]))]  = 1
-      
-        if int(point[1]) > rmax:
-            rmax = int(point[1])
-        if int(point[0]) > cmax:
-            cmax = int(point[0])
-        
     else:
         tmp = point.split("=")
-        
-        
-        fold_ins.append((tmp[0][-1],int(tmp[1])))
-
-rmax+=1
-cmax+=1
-
-    
+        dimension = tmp[0][-1]
+        location = int(tmp[1])
+        fold_ins.append((dimension,location))
+      
+   
 tmp_dict = dict()
 first = True
 for dimension, location in fold_ins:
+    tmp_dict = dict()
     if dimension == 'x':        
         for r,c in dotted:
             if c > location:
@@ -84,7 +70,7 @@ picture = [[0 for _ in range(cmax)]for __ in range(rmax)]
 
 for r,c in dotted:
     picture[r][c] = 'X'
- 
+
 picture = pd.DataFrame(picture)
 try:
     picture.to_csv("ans.csv")
